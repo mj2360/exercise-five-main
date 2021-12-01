@@ -15,7 +15,7 @@ function Header({ logOut, loggedIn }) {
         {!loggedIn && (
           <>
             <a href="/user/id">User Profile</a>
-            <a onClick={() => logOut()}>Log Out</a>
+            <button onClick={() => logOut()}>Log Out</button>
           </>
         )}
       </nav>
