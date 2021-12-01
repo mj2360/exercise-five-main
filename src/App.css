@@ -24,5 +24,16 @@
 
 .Header nav a:last-child {
   margin-right: 0;
-  margin-right: 0;
+  padding-right: 0;
+}
+
+.Form form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+}
+
+.Form input {
+  margin-bottom: 30px;
+  padding: 15px 5px;
 }

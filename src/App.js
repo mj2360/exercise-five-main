@@ -73,7 +73,7 @@ function App() {
                   setUserInformation={setUserInformation}
                 />
               ) : (
-                <></>
+                <Navigate to={`/user/${userInformation.uid}`} />
               )
             }
           />
@@ -86,7 +86,7 @@ function App() {
                   setUserInformation={setUserInformation}
                 />
               ) : (
-                <></>
+                <Navigate to={`/user/${userInformation.uid}`} />
               )
             }
           />
