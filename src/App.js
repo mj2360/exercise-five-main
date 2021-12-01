@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  Navigate,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import Header from "./components/Header";
 import CreateUser from "./pages/CreateUser";
 import React, { useCallback, useState, useEffect } from "react";
@@ -7,7 +12,7 @@ import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile";
 import FirebaseConfig from "./components/FirebaseConfig";
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOUt } from "firebase/auth";
 
 function App() {
   const app = initializeApp(FirebaseConfig);
@@ -35,8 +40,8 @@ function App() {
           setUserInformation({});
           setLoggedIn(false);
         }
+        setLoading(false);
       });
-      setLoading(false);
     }
   }, [appInitialized]);
 
@@ -52,7 +57,7 @@ function App() {
       });
   }
 
-  if (loading) return null;
+  if (loading || !appInitialized) return null;
   return (
     //brackets wrap the application ---> short hand for a React.fragment
     //better than wrapping in a div
@@ -62,7 +67,13 @@ function App() {
         <Routes>
           <Route
             path="/user/:id"
-            element={loggedIn ? <UserProfile /> : <></>}
+            element={
+              loggedIn ? (
+                <UserProfile userInformation={userInformation} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/create"
